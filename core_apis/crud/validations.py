@@ -52,7 +52,7 @@ class DataValidation(object):
         return response
 
     
-    def book_validate(self, method, request_data):
+    def book_master_validate(self, method, request_data):
         response = {"success":True,"message":""}
         if method.lower() in ['get','put', 'delete']:
             print 'weird'
@@ -70,18 +70,11 @@ class DataValidation(object):
                 response['status'] = status.HTTP_400_BAD_REQUEST
                 return response
 
-            elif request_data.data.get('member_type'):
-                if request_data.data.member_type not in settings.MEMBER_TYPES:
-                    response['success'] = False
-                    response['message'] = "member_type should be A or U only."
-                    response['status'] = status.HTTP_400_BAD_REQUEST
-                    return response   
-
         if method.lower() in ['post']:
             data = request_data.data
-            if not (data.get('email') and data.get('phone') and data.get('first_name') and data.get('expires_on')):
+            if not (data.get('author_email') and data.get('title') and data.get('isbn')):
                 response['success'] = False
-                response['message'] = "Please check the email/phone/first_name/expires_on fields."
+                response['message'] = "Please check the author_email/isbn/title fields."
                 response['status'] = status.HTTP_400_BAD_REQUEST         
                 return response
 
