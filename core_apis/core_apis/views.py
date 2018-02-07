@@ -5,6 +5,7 @@ from rest_framework.reverse import reverse
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-       'member_operations': reverse('crud:member_route', request=request, format=format),
-       'book_operations': reverse('crud:book_route', request=request, format=format),
+       'MemberCRUD': reverse('crud:member_route', request=request, format=format),
+       'BookCRUD': reverse('crud:book_route', request=request, format=format),
+       'BookBorrowReturn': reverse('crud:book_action_route', request=request, format=format),
     })

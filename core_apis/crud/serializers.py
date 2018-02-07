@@ -1,7 +1,9 @@
 # Write serializers here
 from rest_framework import serializers
 
-from models import Member, Book_master
+#Model imports
+from models import Member, Book_master, BookAction
+
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
@@ -11,3 +13,8 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book_master
         fields = ('title', 'isbn', 'author', 'is_deleted')
+
+class BookActionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book_master
+        fields = ('member', 'copy', 'borrowed_date', 'is_returned', 'due_date')

@@ -67,7 +67,21 @@ class Book(models.Model):
     book_master = models.ForeignKey('Book_master', on_delete=models.CASCADE, verbose_name="Id of the parent book.")
     last_borrowed_date = models.DateTimeField(auto_now_add=True, verbose_name="Most reccent borrow date for this copy.")
     book_id = models.UUIDField(default=uuid.uuid4, editable=False)
+    available = models.BooleanField(default=True, verbose_name="Book availability.") 
 
     def __str__(self):
         """ String representation of the Model."""
         return '{"Book master id": "%s"}' % (self.book_master_id)
+
+class BookAction(models.Model):
+    """ """
+    member = models.ManyToManyField(Member, verbose_name="Member id of the user.")
+    copy = models.ForeignKey('Book', on_delete=models.PROTECT, verbose_name="Id of the book copy issued.")
+    borrowed_date = models.DateTimeField(default = None, null=True, blank=True, verbose_name="Borrowed date.")
+    due_date = models.DateTimeField(verbose_name="Borrowed date.")
+    is_returned = models.BooleanField(default=False, verbose_name="Book return status.")
+    fine_collected = models.DecimalField(default=0.00, max_digits=6, decimal_places=2, verbose_name="Fine collected.")
+
+    def __str__(self):
+        """ String representation of the Model."""
+        return '{"Book action. Member": "%s", "Copy: " "%s"}' % (self.member,self.copy)

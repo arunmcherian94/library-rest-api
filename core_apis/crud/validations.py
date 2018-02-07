@@ -1,18 +1,12 @@
 from core_apis import settings
 from rest_framework import status
-# Data serializers for each of the models will be written here.
- 
-class MemberValidation(object):
-    """
-    """
-    def PostMethodValidation(self,email,phone,memb_type):
-        if not (email and phone and memb_type):
-            return False
-        elif memb_type not in settings.MEMBER_TYPES:
-            return False
-        else:
-            return True
 
+'''
+This is a makeshift implementation for a very basic validation.
+Code redundancy is purposely ignored. Validation to be done via serialzers ideally.
+'''
+
+ 
 class DataValidation(object):
 
     def member_validate(self, method, request_data):
@@ -76,6 +70,33 @@ class DataValidation(object):
                 response['success'] = False
                 response['message'] = "Please check the author_email/isbn/title fields."
                 response['status'] = status.HTTP_400_BAD_REQUEST         
+                return response
+
+        return response
+
+    def book_action_validate(self, method, request_data):
+
+        response = {"success":True,"message":""}
+        data = request_data.data
+        if method.lower() in ['post']:
+            if not data:
+                response['success'] = False
+                response['message'] = "Please provide book_id/email in request body."
+                response['status'] = status.HTTP_400_BAD_REQUEST
+                return response
+
+            elif not (data.get('book_id') and data.get('email')):
+                response['success'] = False
+                response['message'] = "Please check the book_id/email fields."
+                response['status'] = status.HTTP_400_BAD_REQUEST         
+                return response
+        
+        elif method.lower() in ['delete']:
+            book_id = request_data.query_params.get('book_id')
+            if not book_id:
+                response['success'] = False
+                response['message'] = "Please provide book_id parameter in query string."
+                response['status'] = status.HTTP_400_BAD_REQUEST
                 return response
 
         return response

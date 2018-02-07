@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 MEMBER_TYPES = ['A','U']
+DAYS_TO_RETURN = 7
 
 # Application definition
 
