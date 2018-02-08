@@ -27,7 +27,6 @@ REST api Framework is built with these tools:
 * Database configuration
     * `create database librarydb
     * configure database settings in <repo>/core_apis/settings.py
-    * `use librarydb;
     * `mysql -u <user> -p < <repo>/core_apis/librarydb_dump.sql
 
 * Summary of set up
