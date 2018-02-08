@@ -54,10 +54,16 @@ class GenericHandler(object):
     def read(self, model_name, request, query_param):
         """ Read operation logic. """
         kwargs = {}
+        get_all = False
         query_param_value = request.query_params.get(query_param)
+        if not query_param_value:
+            get_all = True
         kwargs[query_param] = query_param_value
         try:
-          model_data = model_list[model_name].objects.filter( **kwargs)
+          if get_all:
+              model_data = model_list[model_name].objects.all()
+          else:
+              model_data = model_list[model_name].objects.filter( **kwargs)
           if not model_data:
               message = {"message":"No "+model_name+" found for: "+query_param_value, "status":status.HTTP_200_OK}
               return message
@@ -291,9 +297,9 @@ class BookActions(APIView, GenericHandler):
         if not email:
             return Response("Provide email parameter in query string.",status=status.HTTP_400_BAD_REQUEST)
         try:
-          member = Member.objects.get(email=email)
-          print member
-          model_data = BookAction.objects.filter(member=member,is_returned=False)
+          # member = Member.objects.get(email=email)
+          # print member
+          model_data = BookAction.objects.filter(is_returned=False)
           if not model_data:
               return Response("No borrowed books found for: "+email,status=status.HTTP_200_OK)
           serializer = BookActionSerializer(model_data, many=True)
@@ -309,7 +315,6 @@ class BookActions(APIView, GenericHandler):
             print e
             return Response(str(e),status=status.HTTP_400_BAD_REQUEST) 
     '''
-
     def post(self, request, format=None):
         """ To borrow a book. """
         '''

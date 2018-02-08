@@ -25,8 +25,11 @@ REST api Framework is built with these tools:
 ### How do I get set up? ###
 
 * Database configuration
-    * create database librarydb
+    * `create database librarydb
     * configure database settings in <repo>/core_apis/settings.py
+    * `use librarydb;
+    * `mysql -u <user> -p < <repo>/core_apis/librarydb_dump.sql
+
 * Summary of set up
     * Assuming you have installed all the above mentioned tools, required for this application, please go ahead and check out this repository.
     * `create a virtualenv and activate
@@ -71,8 +74,10 @@ REST api Framework is built with these tools:
         * DELETE -> to return a book
             * book_id (unique copy id) should be present in query string
 
-### Contribution guidelines ###
+### ToDos ###
 
-* Writing tests
-* Code review
-* Other guidelines
+* Logging. Left this out for simplicity
+* Validation of data using django rest serializers
+* Table to store plan details for each member
+* AuthorCRUD functionalities
+

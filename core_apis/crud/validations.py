@@ -12,7 +12,7 @@ class DataValidation(object):
     def member_validate(self, method, request_data):
         print method
         response = {"success":True,"message":""}
-        if method.lower() in ['get','put', 'delete']:
+        if method.lower() in ['put', 'delete']:
             print 'weird'
             email = request_data.query_params.get('email')
             if not email:
@@ -48,7 +48,7 @@ class DataValidation(object):
     
     def book_master_validate(self, method, request_data):
         response = {"success":True,"message":""}
-        if method.lower() in ['get','put', 'delete']:
+        if method.lower() in ['put', 'delete']:
             print 'weird'
             isbn = request_data.query_params.get('isbn')
             if not isbn:
