@@ -27,16 +27,16 @@ REST api Framework is built with these tools:
 * Database configuration
     * `create database librarydb
     * configure database settings in <repo>/core_apis/settings.py
-    * `mysql -u <user> -p < <repo>/core_apis/librarydb_dump.sql
+    * `mysql -u <user> -p < <repo>/core_apis/librarydb_dump.sql`
 
 * Summary of set up
     * Assuming you have installed all the above mentioned tools, required for this application, please go ahead and check out this repository.
-    * `create a virtualenv and activate
+    * `create a virtualenv and activate`
     * `pip install -r requirements.txt`
-    * `cd <repo>/core_apis
-    * `python manage.py makemigrations
-    * `python manage.py migrate
-    * `python manage.py runserver
+    * `cd <repo>/core_apis`
+    * `python manage.py makemigrations`
+    * `python manage.py migrate`
+    * `python manage.py runserver`
 
 * Dependencies
 
